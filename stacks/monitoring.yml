@@ -1,0 +1,61 @@
+version: "3.1"
+services:
+  grafana: #TODO: make data persist via volume
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SERVER_ADMIN_PASSWORD: admin
+    deploy:
+      replicas: 1
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    deploy:
+      replicas: 1
+  blackbox_exporter:
+    image: prom/blackbox-exporter
+    deploy:
+      mode: global
+    ports:
+      - "9115:9115"
+  node_exporter:
+    image: prom/node-exporter
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc
+      - /sys:/host/sys
+      - /:/rootfs
+    deploy:
+      mode: global
+    entrypoint:
+      - /bin/node_exporter
+      - -collector.procfs=/host/proc
+      - -collector.sysfs=/host/sys
+      - -collector.textfile.directory=/etc/node-exporter/
+      - -collectors.enabled=conntrack,diskstats,entropy,filefd,filesystem,loadavg,mdadm,meminfo,netdev,netstat,stat,textfile,time,vmstat,ipvs
+  postgres:
+    image: postgres:9.5
+    volumes:
+      - /var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  cachet:
+    image: cachethq/docker
+    ports:
+      - 80:8000
+    environment:
+      - DB_DRIVER=pgsql
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_PREFIX=chq_
+      - APP_KEY=base64:9ngR43qz6EFhaFZV0O9nRlkcSi+oU/RVi0Dk86OgXbc=
+      - DEBUG=false
+    depends_on:
+      - postgres

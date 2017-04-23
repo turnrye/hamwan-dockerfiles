@@ -1,0 +1,32 @@
+version: "3.1" #TODO: solve data persistence
+services:
+  portal:
+    image: hamwan/portal
+    depends_on:
+      - portal-postgres
+      - portal-powerdns
+    ports:
+      - "80:80"
+      - "443:443"
+    secrets:
+      - hamwanadmin.crt
+      - hamwanadmin.key
+      - django_secret_key
+  portal-postgres:
+    image: hamwan/portal-postgres
+    environment:
+      POSTGRES_PASSWORD: portal
+      POSTGRES_USER: portal
+    volumes:
+      - /var/lib/postgresql/data
+  portal-powerdns:
+    image: hamwan/portal-powerdns
+    depends_on:
+      - portal-postgres
+    environment:
+      - GPGSQL_HOST=portal-postgres
+    secrets:
+      - gpgsql-password
+    ports:
+      - "53:1053"
+      - "53:1053/udp"
