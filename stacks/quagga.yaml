@@ -1,0 +1,31 @@
+version: "3.1" #TODO: solve data persistence
+services:
+  quagga:
+    image: hamwan/quagga
+    ports:
+      - target: 2601
+        published: 2601
+        protocol: tcp
+        mode: host
+      - target: 2602
+        published: 2602
+        protocol: tcp
+        mode: host
+      - target: 2603
+        published: 2603
+        protocol: tcp
+        mode: host
+      - target: 2604
+        published: 2604
+        protocol: tcp
+        mode: host
+      - target: 2605
+        published: 2605
+        protocol: tcp
+        mode: host
+      - target: 2606
+        published: 2606
+        protocol: tcp
+        mode: host
+    deploy:
+      mode: global
