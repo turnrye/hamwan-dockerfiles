@@ -1,0 +1,13 @@
+version: "3.1" #TODO: solve data persistence
+services:
+  quagga:
+    image: haproxy
+    secrets:
+      - haproxy-cfg
+    ports:
+      - "80:80"
+      - "443:443"
+    command: "haproxy -f /run/secrets/haproxy-cfg"
+  secrets:
+    haproxy-cfg:
+      file: ./haproxy.cfg

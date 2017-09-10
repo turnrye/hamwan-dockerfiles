@@ -14,32 +14,18 @@ services:
       - "9090:9090"
     deploy:
       replicas: 1
+    volumes:
+      - monitoring-prometheus:/prometheus
   blackbox_exporter:
     image: prom/blackbox-exporter
     deploy:
       mode: global
     ports:
       - "9115:9115"
-  node_exporter:
-    image: prom/node-exporter
-    ports:
-      - "9100:9100"
-    volumes:
-      - /proc:/host/proc
-      - /sys:/host/sys
-      - /:/rootfs
-    deploy:
-      mode: global
-    entrypoint:
-      - /bin/node_exporter
-      - -collector.procfs=/host/proc
-      - -collector.sysfs=/host/sys
-      - -collector.textfile.directory=/etc/node-exporter/
-      - -collectors.enabled=conntrack,diskstats,entropy,filefd,filesystem,loadavg,mdadm,meminfo,netdev,netstat,stat,textfile,time,vmstat,ipvs
   postgres:
     image: postgres:9.5
     volumes:
-      - /var/lib/postgresql/data
+      - monitoring-postgres:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -59,3 +45,14 @@ services:
       - DEBUG=false
     depends_on:
       - postgres
+  cadvisor:
+    image: google/cadvisor:latest
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - 8080:8080
+    deploy:
+      mode: global
