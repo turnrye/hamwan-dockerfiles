@@ -40,6 +40,11 @@ services:
       - "9116:9116"
     networks:
       - utility_exporters
+    secrets:
+      - snmp_exporter_config
+    entrypoint:
+      - /bin/snmp_exporter
+      - --config.file=/run/secrets/snmp_exporter_config
   cadvisor:
     image: google/cadvisor:latest
     volumes:
@@ -55,6 +60,8 @@ services:
 secrets:
    prometheus_config:
      file: ../prometheus/prometheus-config.yml
+  snmp_exporter_config:
+    file: ../prometheus/snmp.yml
 
 networks:
   utility_exporters:
