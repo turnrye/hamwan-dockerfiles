@@ -24,7 +24,7 @@ scrape_configs:
     - source_labels: [__param_target]
       target_label: instance
     - target_label: __address__
-      replacement: 127.0.0.1:9115  # Blackbox exporter.
+      replacement: blackbox_exporter:9115  # Blackbox exporter.
 - job_name: prometheus
   scrape_interval: 15s
   scrape_timeout: 10s
