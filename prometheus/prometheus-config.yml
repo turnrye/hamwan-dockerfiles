@@ -72,7 +72,7 @@ scrape_configs:
       - er1.mil.memhamwan.net
   metrics_path: /snmp
   params:
-    module: [snmp]
+    module: [mikrotik]
   relabel_configs:
     - source_labels: [__address__]
       target_label: __param_target
