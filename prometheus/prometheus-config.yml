@@ -25,3 +25,13 @@ scrape_configs:
       target_label: instance
     - target_label: __address__
       replacement: 127.0.0.1:9115  # Blackbox exporter.
+- job_name: prometheus
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
+    - localhost:9090
+    - coconut.crw.memhamwan.net:8080
+    - mango.crw.memhamwan.net:8080
