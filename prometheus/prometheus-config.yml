@@ -12,12 +12,12 @@ scrape_configs:
     module: [icmp]  # Look for a HTTP 200 response.
   static_configs:
     - targets:
-      - r3.crw.memhamwan.net
-      - r2.crw.memhamwan.net
-      - r1.crw.memhamwan.net
-      - omn1.crw.memhamwan.net
-      - omn2.crw.memhamwan.net
-      - ptpleb.crw.memhamwan.net
+      - cam1.azo.memhamwan.net
+      - weather.azo.memhamwan.net
+      - cam1.mno.memhamwan.net
+      - cam2.mno.memhamwan.net
+      - cam1.hil.memhamwan.net
+      - cam3.crw.memhamwan.net
   relabel_configs:
     - source_labels: [__address__]
       target_label: __param_target
@@ -66,9 +66,13 @@ scrape_configs:
       - sec1.mno.memhamwan.net
       - sec2.mno.memhamwan.net
       - sec3.mno.memhamwan.net
+      - r1.azo.memhamwan.net
+      - ptpleb.azo.memhamwan.net
+      - ptpazo.leb.memhamwan.net
+      - er1.mil.memhamwan.net
   metrics_path: /snmp
   params:
-    module: [mikrotik]
+    module: [snmp]
   relabel_configs:
     - source_labels: [__address__]
       target_label: __param_target
