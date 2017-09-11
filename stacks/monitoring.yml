@@ -58,8 +58,8 @@ services:
       mode: global
 
 secrets:
-   prometheus_config:
-     file: ../prometheus/prometheus-config.yml
+  prometheus_config:
+   file: ../prometheus/prometheus-config.yml
   snmp_exporter_config:
     file: ../prometheus/snmp.yml
 
