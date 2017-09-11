@@ -1,4 +1,6 @@
 version: "3.1"
+networks:
+  utility_exporters:
 services:
   grafana: #TODO: make data persist via volume
     image: grafana/grafana
@@ -62,6 +64,3 @@ secrets:
    file: ../prometheus/prometheus-config.yml
   snmp_exporter_config:
     file: ../prometheus/snmp.yml
-
-networks:
-  utility_exporters:
