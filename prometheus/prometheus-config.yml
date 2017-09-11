@@ -1,0 +1,27 @@
+# my global config
+global:
+  scrape_interval:     15s
+  evaluation_interval: 30s
+  # scrape_timeout is set to the global default (10s).
+
+
+scrape_configs:
+- job_name: 'blackbox'
+  metrics_path: /probe
+  params:
+    module: [http_2xx]  # Look for a HTTP 200 response.
+  static_configs:
+    - targets:
+      - r3.crw.memhamwan.net
+      - r2.crw.memhamwan.net
+      - r1.crw.memhamwan.net
+      - omn1.crw.memhamwan.net
+      - omn2.crw.memhamwan.net
+      - ptpleb.crw.memhamwan.net
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: 127.0.0.1:9115  # Blackbox exporter.

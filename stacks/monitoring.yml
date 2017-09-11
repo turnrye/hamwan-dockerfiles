@@ -8,29 +8,20 @@ services:
       GF_SERVER_ADMIN_PASSWORD: admin
     deploy:
       replicas: 1
-    volumes:
-      - /srv/monitoring-grafana:/var/lib/grafana
   prometheus:
     image: prom/prometheus
     ports:
       - "9090:9090"
     deploy:
       replicas: 1
-    volumes:
-      - /srv/monitoring-prometheus:/prometheus
+    secrets:
+      - prometheus_config
   blackbox_exporter:
     image: prom/blackbox-exporter
     deploy:
       mode: global
     ports:
       - "9115:9115"
-  postgres:
-    image: postgres:9.5
-    volumes:
-      - /srv/monitoring-postgres:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
   cadvisor:
     image: google/cadvisor:latest
     volumes:
@@ -42,3 +33,7 @@ services:
       - 8080:8080
     deploy:
       mode: global
+
+secrets:
+   prometheus_config:
+     file: ../prometheus/prometheus-config.yml
