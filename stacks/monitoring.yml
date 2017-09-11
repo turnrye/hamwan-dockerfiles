@@ -27,9 +27,17 @@ services:
   blackbox_exporter:
     image: prom/blackbox-exporter
     deploy:
-      mode: global
+      replicas: 2
     ports:
       - "9115:9115"
+    networks:
+      - utility_exporters
+  snmp_exporter:
+    image: prom/snmp-exporter
+    deploy:
+      replicas: 2
+    ports:
+      - "9116:9116"
     networks:
       - utility_exporters
   cadvisor:
