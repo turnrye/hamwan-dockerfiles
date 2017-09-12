@@ -4,17 +4,18 @@ networks:
   prometheus:
 services:
   grafana: #TODO: make data persist via volume
-    build:
-      context: ../prometheus
-      dockerfile: grafana_dockerfile.yml
+    image: k0ret/grafana-runonce
     ports:
       - "3000:3000"
     environment:
       GF_SERVER_ADMIN_PASSWORD: admin
+      DOCKER_SECRET_NAME: grafana_run_once
     deploy:
       replicas: 1
     networks:
       - prometheus
+    secrets:
+      - grafana_run_once
   prometheus:
     image: prom/prometheus
     ports:
@@ -70,3 +71,5 @@ secrets:
    file: ../prometheus/prometheus-config.yml
   snmp_exporter_config:
     file: ../prometheus/snmp.yml
+  grafana_run_once:
+    file: ../prometheus/grafana_run_once.sh

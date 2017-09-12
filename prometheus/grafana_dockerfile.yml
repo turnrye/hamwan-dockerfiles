@@ -1,3 +1,0 @@
-FROM grafana/grafana
-ADD grafana_setup.sh /opt/grafana_setup.sh
-CMD chmod +x /opt/grafana_setup.sh
