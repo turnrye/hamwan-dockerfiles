@@ -1,15 +1,20 @@
 version: "3.1"
 networks:
   utility_exporters:
+  prometheus:
 services:
   grafana: #TODO: make data persist via volume
-    image: grafana/grafana
+    build:
+      context: ../prometheus
+      dockerfile: grafana_dockerfile.yml
     ports:
       - "3000:3000"
     environment:
       GF_SERVER_ADMIN_PASSWORD: admin
     deploy:
       replicas: 1
+    networks:
+      - prometheus
   prometheus:
     image: prom/prometheus
     ports:
@@ -26,6 +31,7 @@ services:
       - -web.console.templates=/etc/prometheus/consoles
     networks:
       - utility_exporters
+      - prometheus
   blackbox_exporter:
     image: prom/blackbox-exporter
     deploy:
