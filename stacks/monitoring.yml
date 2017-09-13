@@ -75,7 +75,8 @@ services:
       - 80
     command:
       - haproxy
-      - -f /run/secrets/haproxy_config
+      - -f
+      - /run/secrets/haproxy_config
 
 
 secrets:
