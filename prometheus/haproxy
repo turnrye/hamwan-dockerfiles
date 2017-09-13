@@ -8,11 +8,9 @@ frontend http-in
 
 backend grafana-backend
     server node1 grafana:3000
-    reqrep ^([^\ ]*\ )/prometheus(.*)     \1/\2
     mode http
 
 
 backend prometheus-backend
     server node1 prometheus:9090
-    reqrep ^([^\ ]*\ )/prometheus(.*)     \1/\2
     mode http
