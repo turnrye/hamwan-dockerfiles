@@ -72,7 +72,7 @@ services:
     secrets:
       - haproxy_config
     ports:
-      - "8000:80"
+      - "80:80"
     command:
       - haproxy
       - -f
