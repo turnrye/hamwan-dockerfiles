@@ -65,11 +65,25 @@ services:
       - 8080:8080
     deploy:
       mode: global
+  haproxy:
+    image: haproxy:alpine
+    networks:
+      - prometheus
+    secrets:
+      - haproxy_config
+    ports:
+      - 80
+    command:
+      - haproxy
+      - -f /run/secrets/haproxy_config
+
 
 secrets:
   prometheus_config:
-   file: ../prometheus/prometheus-config.yml
+   file: ./prometheus/prometheus-config.yml
   snmp_exporter_config:
-    file: ../prometheus/snmp.yml
+    file: ./prometheus/snmp.yml
   grafana_run_once:
-    file: ../prometheus/grafana_run_once.sh
+    file: ./prometheus/grafana_run_once.sh
+  haproxy_config:
+    file: ./prometheus/haproxy
