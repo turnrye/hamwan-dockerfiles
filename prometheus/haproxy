@@ -5,15 +5,17 @@ frontend http-in
     acl prefixed-with-prometheus  path_beg /prometheus/
     use_backend prometheus-backend if  prefixed-with-prometheus
     # other rules ...
-    default_backend default-backend
+    default_backend grafana-backend
 
 backend grafana-backend
     server node1 grafana:3000
     # Map url path as ProxyPass does
     reqirep  ^(GET|POST|HEAD)\ /grafana/(.*)     \1\ /\2
+    mode http
 
 
 backend prometheus-backend
     server node1 prometheus:9090
     # Map url path as ProxyPass does
     reqirep  ^(GET|POST|HEAD)\ /prometheus/(.*)     \1\ /\2
+    mode http
