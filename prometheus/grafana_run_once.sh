@@ -14,7 +14,7 @@ curl -v -k -X 'POST' -H "Content-Type: application/json" --user 'admin:admin' -d
 }' http://localhost:3000/api/admin/users
 curl -v -k -X 'POST' -H "Content-Type: application/json" --user 'admin:admin' -d '{
   "dashboard": {
-    "title": "RouterOS Devices",
+    "title": "Docker Containers",
     "annotations": {
       "list": []
     },
@@ -694,7 +694,7 @@ curl -v -k -X 'POST' -H "Content-Type: application/json" --user 'admin:admin' -d
     "annotations": {
       "list": []
     },
-    "title": "Docker Containers",
+    "title": "RouterOS Devices",
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
