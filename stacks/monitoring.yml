@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3.1"
 networks:
   utility_exporters:
   prometheus:
@@ -72,10 +72,7 @@ services:
     secrets:
       - haproxy_config
     ports:
-      - target: 80
-        published: 8000
-        protocol: tcp
-        mode: host
+      - "8000:80"
     command:
       - haproxy
       - -f
