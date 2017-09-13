@@ -14,16 +14,16 @@ curl -v -k -X 'POST' -H "Content-Type: application/json" --user 'admin:admin' -d
 }' http://localhost:3000/api/admin/users
 curl -v -k -X 'POST' -H "Content-Type: application/json" --user 'admin:admin' -d '{
   "dashboard": {
-    "title": "RouterOS Device",
+    "title": "RouterOS Devices",
     "annotations": {
       "list": []
     },
     "description": "Docker monitoring with Prometheus and cAdvisor",
     "editable": true,
-    "gnetId": 193,
+    "gnetId": null,
     "graphTooltip": 1,
     "hideControls": false,
-    "id": 2,
+    "id": null,
     "links": [],
     "refresh": "10s",
     "rows": [
@@ -694,11 +694,12 @@ curl -v -k -X 'POST' -H "Content-Type: application/json" --user 'admin:admin' -d
     "annotations": {
       "list": []
     },
+    "title": "Docker Containers",
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
     "hideControls": false,
-    "id": 1,
+    "id": null,
     "links": [],
     "rows": [
       {
