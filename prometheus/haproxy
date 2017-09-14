@@ -10,9 +10,12 @@ frontend http-in
 
 backend grafana-backend
     server node1 grafana:3000
+    reqrep ^([^\ ]*)\ (.*)/grafana \1\ /\2 if acl_dev
+    option forwardfor
     mode http
 
 
 backend prometheus-backend
     server node1 prometheus:9090
+    option forwardfor
     mode http
