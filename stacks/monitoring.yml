@@ -5,8 +5,8 @@ networks:
 services:
   grafana: #TODO: make data persist via volume
     image: k0ret/grafana-runonce
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
       GF_SERVER_ADMIN_PASSWORD: admin
       DOCKER_SECRET_NAME: grafana_run_once
@@ -18,8 +18,8 @@ services:
       - grafana_run_once
   prometheus:
     image: prom/prometheus
-    ports:
-      - "9090:9090"
+    expose:
+      - "9090"
     deploy:
       replicas: 1
     secrets:
@@ -38,16 +38,16 @@ services:
     image: prom/blackbox-exporter
     deploy:
       replicas: 2
-    ports:
-      - "9115:9115"
+    expose:
+      - "9115"
     networks:
       - utility_exporters
   snmp_exporter:
     image: prom/snmp-exporter
     deploy:
       replicas: 2
-    ports:
-      - "9116:9116"
+    expose:
+      - "9116"
     networks:
       - utility_exporters
     secrets:
@@ -62,8 +62,8 @@ services:
       - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
-    ports:
-      - 8080:8080
+    expose:
+      - "8080"
     deploy:
       mode: global
   haproxy:
