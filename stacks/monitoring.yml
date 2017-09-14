@@ -18,7 +18,7 @@ services:
       - grafana_run_once
   prometheus:
     image: prom/prometheus
-    expose:
+    ports:
       - "9090"
     deploy:
       replicas: 1
