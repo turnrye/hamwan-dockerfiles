@@ -10,7 +10,6 @@ frontend http-in
 
 backend grafana-backend
     server node1 grafana:3000
-    http-request replace-header Host ^(.*?)(:[0-9]+)?$ \1:3000
     reqrep ^([^\ ]*)\ (.*)/grafana \1\ /\2
     option forwardfor
     mode http
