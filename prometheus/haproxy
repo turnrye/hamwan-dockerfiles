@@ -5,6 +5,8 @@ frontend http-in
     acl is-prometheus  path_beg /prometheus/
     use_backend grafana-backend if  is-grafana
     use_backend prometheus-backend if  is-prometheus
+    default_backend prometheus-backend
+
 
 backend grafana-backend
     server node1 grafana:3000
