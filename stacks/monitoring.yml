@@ -10,7 +10,7 @@ services:
     environment:
       GF_SERVER_ADMIN_PASSWORD: admin
       DOCKER_SECRET_NAME: grafana_run_once
-#      GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s:/grafana"
+      GF_SERVER_ROOT_URL: '%(protocol)s://%(domain)s:/grafana'
     deploy:
       replicas: 1
     networks:
