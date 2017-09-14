@@ -1,7 +1,7 @@
 frontend http-in
     bind 0.0.0.0:80
     mode http
-    acl is-grafana  path_beg /grafana/
+    acl is-grafana  path_beg /grafana
     acl is-prometheus  path_beg /prometheus/
     use_backend grafana-backend if  is-grafana
     use_backend prometheus-backend if  is-prometheus
