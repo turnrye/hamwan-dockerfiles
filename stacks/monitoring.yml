@@ -82,6 +82,8 @@ services:
       - /run/secrets/haproxy_config
   dynamic-inventory:
     image: k0ret/hamwan-dynamic-inventory
+    environment:
+      PORTAL_ANSIBLE_URL: https://portal.memhamwan.net/host/ansible.json
     volumes:
       - dynamic-prometheus-inventory:/var/hamwan-inventory/
 #TODO: add another service that just runs my loop
