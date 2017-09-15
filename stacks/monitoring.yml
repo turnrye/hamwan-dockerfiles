@@ -34,6 +34,8 @@ services:
     networks:
       - utility_exporters
       - prometheus
+    volumes:
+      - dynamic-prometheus-inventory:/opt/dynamic-prometheus-inventory
   blackbox_exporter:
     image: prom/blackbox-exporter
     deploy:
@@ -78,7 +80,14 @@ services:
       - haproxy
       - -f
       - /run/secrets/haproxy_config
+  dynamic-inventory:
+    image: k0ret/hamwan-dynamic-inventory
+    volumes:
+      - dynamic-prometheus-inventory:/var/hamwan-inventory/
+#TODO: add another service that just runs my loop
 
+volumes:
+  dynamic-prometheus-inventory:
 
 secrets:
   prometheus_config:
