@@ -36,6 +36,10 @@ services:
       - prometheus
     volumes:
       - dynamic-prometheus-inventory:/opt/dynamic-prometheus-inventory
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
   blackbox_exporter:
     image: prom/blackbox-exporter
     deploy:
@@ -86,6 +90,10 @@ services:
       PORTAL_ANSIBLE_URL: https://portal.memhamwan.net/host/ansible.json
     volumes:
       - dynamic-prometheus-inventory:/var/hamwan-inventory/
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 #TODO: add another service that just runs my loop
 
 volumes:
