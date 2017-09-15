@@ -5,8 +5,8 @@ networks:
 services:
   grafana: #TODO: make data persist via volume
     image: k0ret/grafana-runonce
-    expose:
-      - "3000"
+    ports:
+      - "3000:3000"
     environment:
       GF_SERVER_ADMIN_PASSWORD: admin
       DOCKER_SECRET_NAME: grafana_run_once
@@ -19,7 +19,7 @@ services:
   prometheus:
     image: prom/prometheus
     ports:
-      - "9090"
+      - "9090:9090"
     deploy:
       replicas: 1
     secrets:

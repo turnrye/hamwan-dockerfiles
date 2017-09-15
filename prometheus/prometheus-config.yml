@@ -10,14 +10,9 @@ scrape_configs:
   metrics_path: /probe
   params:
     module: [icmp]  # Look for a HTTP 200 response.
-  static_configs:
-    - targets:
-      - cam1.azo.memhamwan.net
-      - weather.azo.memhamwan.net
-      - cam1.mno.memhamwan.net
-      - cam2.mno.memhamwan.net
-      - cam1.hil.memhamwan.net
-      - cam3.crw.memhamwan.net
+  file_sd_configs:
+  - files:
+    - /opt/dynamic-prometheus-inventory/MemHamWAN_hosts.json
   relabel_configs:
     - source_labels: [__address__]
       target_label: __param_target
@@ -30,46 +25,13 @@ scrape_configs:
   scrape_timeout: 10s
   metrics_path: /metrics
   scheme: http
-  static_configs:
-  - targets:
-    - localhost:9090
-    - coconut.crw.memhamwan.net:8080
-    - mango.crw.memhamwan.net:8080
+  file_sd_configs:
+  - files:
+    - /opt/dynamic-prometheus-inventory/linux_hosts.json
 - job_name: 'snmp'
-  static_configs:
-    - targets:
-      - r3.crw.memhamwan.net
-      - r2.crw.memhamwan.net
-      - r1.crw.memhamwan.net
-      - omn1.crw.memhamwan.net
-      - omn2.crw.memhamwan.net
-      - ptpleb.crw.memhamwan.net
-      - ptpcrw.leb.memhamwan.net
-      - r1.leb.memhamwan.net
-      - ptphil.leb.memhamwan.net
-      - ptpleb.hil.memhamwan.net
-      - r1.hil.memhamwan.net
-      - sec1.hil.memhamwan.net
-      - sec2.hil.memhamwan.net
-      - sec3.hil.memhamwan.net
-      - ptpleb.sco.memhamwan.net
-      - ptpsco.leb.memhamwan.net
-      - r1.sco.memhamwan.net
-      - sec1.sco.memhamwan.net
-      - sec2.sco.memhamwan.net
-      - sec3.sco.memhamwan.net
-      - ptpmno.leb.memhamwan.net
-      - ptpleb.mno.memhamwan.net
-      - ptpmno.hil.memhamwan.net
-      - ptphil.mno.memhamwan.net
-      - r1.mno.memhamwan.net
-      - sec1.mno.memhamwan.net
-      - sec2.mno.memhamwan.net
-      - sec3.mno.memhamwan.net
-      - r1.azo.memhamwan.net
-      - ptpleb.azo.memhamwan.net
-      - ptpazo.leb.memhamwan.net
-      - er1.mil.memhamwan.net
+  file_sd_configs:
+  - files:
+    - /opt/dynamic-prometheus-inventory/mikrotik_hosts.json
   metrics_path: /snmp
   params:
     module: [mikrotik]
