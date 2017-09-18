@@ -11,7 +11,6 @@ services:
       - "/opt"
   cassandra: #TODO: make data persist via volume
     image: webscam/cassandra:swarm_test
-    environment:
     deploy:
       mode: global
     volumes:
