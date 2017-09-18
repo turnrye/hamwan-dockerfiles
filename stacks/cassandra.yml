@@ -1,0 +1,20 @@
+version: "3.1"
+networks:
+  cassandra:
+services:
+  directories:
+    image: alpine
+    deploy:
+      mode: global
+    entrypoint: sh -c "mkdir -p /opt/cassandra; sh"
+    volumes:
+      - "/opt"
+  cassandra: #TODO: make data persist via volume
+    image: webscam/cassandra:swarm_test
+    environment:
+    deploy:
+      mode: global
+    volumes:
+      - "/home/cassandra:/var/lib/cassandra"
+    networks:
+      - cassandra
