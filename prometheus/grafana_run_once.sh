@@ -687,7 +687,7 @@ curl -v -k -X 'POST' -H "Content-Type: application/json" --user 'admin:admin' -d
     }
   },
   "overwrite": false
-}' http://coconut.crw.memhamwan.net:3000/api/dashboards/db
+}' http://localhost:3000/api/dashboards/db
 
 curl -v -k -X 'POST' -H "Content-Type: application/json" --user 'admin:admin' -d '{
 "dashboard": {
@@ -1734,4 +1734,4 @@ curl -v -k -X 'POST' -H "Content-Type: application/json" --user 'admin:admin' -d
     }
   },
   "overwrite": false
-}' http://coconut.crw.memhamwan.net:3000/api/dashboards/db
+}' http://localhost:3000/api/dashboards/db
